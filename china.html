@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="content-type" content="type=text/html; charset=utf-8">
+</head>
+<body>
+<div id='canvas'></div>
+<script type="text/javascript" src="js/raphael.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript">
+var paper = Raphael(0, 0, 800, 800);
+var china = {};
+for(var p in provinces) {
+	var path = provinces[p],
+		color = Raphael.getColor(),
+		center = getCenter(path, p);
+
+	china[p] = paper.path('M' + path).attr({
+		fill: color,
+		stroke: color,
+		opacity: '0.5',
+		'stroke-width': 2
+	});
+	
+	paper.text(center.x, center.y, capitals[p]).attr({
+		'font-size': '16',
+		'fill': 'black'
+	});
+}
+
+function getCenter(path, province) {
+	var points = path.split(' '),
+		cx = 0,
+		cy = 0,
+		trueLen = 0;
+	for(var i=0, len=points.length; i<len; i++) {
+		var p = points[i];
+		if(p) {
+			trueLen++;
+			p = p.split(',');
+			cx += parseFloat(p[0]);
+			cy += parseFloat(p[1]);
+		}
+	}
+	cx /= trueLen;
+	cy /= trueLen;
+	
+	switch(province) {
+		case 'beijing':
+		cy -= 5;
+		break;
+		case 'hebei':
+		cy += 20;
+		cx -= 5;
+		break;
+		case 'tianjin':
+		cx += 20;
+		cy += 5;
+		break;
+		case 'neimenggu':
+		cy += 20;
+		break;
+	}
+	return {x: cx, y: cy}
+}
+</script>
+</body>
+</html>
