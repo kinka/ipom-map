@@ -11,10 +11,14 @@
 <script type="text/javascript">
 var paper = Raphael(0, 0, 800, 800);
 var china = {};
-for(var p in provinces) {
-	var path = provinces[p],
+var paths = kk.provincePath,
+	centers = kk.provinceCenter,
+	labels = kk.provinceLabel;
+
+for(var p in paths) {
+	var path = paths[p],
 		color = Raphael.getColor(),
-		center = getCenter(path, p);
+		center = centers[p];
 
 	china[p] = paper.path('M' + path).attr({
 		fill: color,
@@ -22,8 +26,8 @@ for(var p in provinces) {
 		opacity: '0.5',
 		'stroke-width': 2
 	});
-	
-	paper.text(center.x, center.y, capitals[p]).attr({
+
+	paper.text(center.x, center.y, labels[p]).attr({
 		'font-size': '16',
 		'fill': 'black'
 	});
@@ -62,7 +66,7 @@ function getCenter(path, province) {
 		cy += 20;
 		break;
 	}
-	return {x: cx, y: cy}
+	return {x: cx.toFixed(2), y: cy.toFixed(2)}
 }
 </script>
 </body>
