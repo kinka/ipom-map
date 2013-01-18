@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title></title>
@@ -8,66 +8,9 @@
 <div id='canvas'></div>
 <script type="text/javascript" src="js/raphael.js"></script>
 <script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/ipom.js"></script>
 <script type="text/javascript">
-var paper = Raphael(0, 0, 800, 800);
-var china = {};
-var paths = kk.provincePath,
-	centers = kk.provinceCenter,
-	labels = kk.provinceLabel;
 
-for(var p in paths) {
-	var path = paths[p],
-		color = Raphael.getColor(),
-		center = centers[p];
-
-	china[p] = paper.path('M' + path).attr({
-		fill: color,
-		stroke: color,
-		opacity: '0.5',
-		'stroke-width': 2
-	});
-
-	paper.text(center.x, center.y, labels[p]).attr({
-		'font-size': '16',
-		'fill': 'black'
-	});
-}
-
-function getCenter(path, province) {
-	var points = path.split(' '),
-		cx = 0,
-		cy = 0,
-		trueLen = 0;
-	for(var i=0, len=points.length; i<len; i++) {
-		var p = points[i];
-		if(p) {
-			trueLen++;
-			p = p.split(',');
-			cx += parseFloat(p[0]);
-			cy += parseFloat(p[1]);
-		}
-	}
-	cx /= trueLen;
-	cy /= trueLen;
-	
-	switch(province) {
-		case 'beijing':
-		cy -= 5;
-		break;
-		case 'hebei':
-		cy += 20;
-		cx -= 5;
-		break;
-		case 'tianjin':
-		cx += 20;
-		cy += 5;
-		break;
-		case 'neimenggu':
-		cy += 20;
-		break;
-	}
-	return {x: cx.toFixed(2), y: cy.toFixed(2)}
-}
 </script>
 </body>
 </html>

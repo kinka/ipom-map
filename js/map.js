@@ -46,7 +46,7 @@ kk.provinceLabel = {
 	"shandong": '山东',
 	"anhui": '安徽',
 	"zhejiang": '浙江',
-	"hunan": '武汉',
+	"hunan": '湖南',
 	"shanxi1": '山西',
 	"chongqing": '重庆',
 	"hubei": '湖北',
